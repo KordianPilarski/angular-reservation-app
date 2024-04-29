@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Reservation } from '../models/reservation';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class ReservationService {
   }
 
   addReservation(reservation: Reservation): void {
-    this.reservations.push(reservation);
+    this.reservations.push({ ...reservation, id: uuidv4() });
     localStorage.setItem('reservations', JSON.stringify(this.reservations));
   }
 
